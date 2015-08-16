@@ -1,0 +1,23 @@
+# Maintainer: msimav
+# Copied directly from nitrotasks, thanks to Ner0
+
+pkgname=lightread
+pkgver=1.2.2
+pkgrel=3
+pkgdesc="a totally awesome offline Google Reader."
+arch=('any')
+url="https://launchpad.net/lightread"
+license=('Simplified BSD Licence')
+depends=('pygtk' 'python2' 'python2-gobject' 'python2-xdg' 'pywebkitgtk' 'libdbusmenu' 'python2-notify' 'webkitgtk3')
+makedepends=('python2-distutils-extra')
+install=$pkgname.install
+source=("https://launchpad.net/${pkgname}/trunk/${pkgver}/+download/${pkgname}_${pkgver}.tar.gz")
+md5sums=('f24b75944570d3aed6314af21e634bc1')
+
+package() {
+  cd quickly_trunk
+
+  python2 setup.py install --root="$pkgdir/" --optimize=1
+
+  find "$pkgdir/" -type f -not -name lightread -exec chmod 644 '{}' \;
+}
